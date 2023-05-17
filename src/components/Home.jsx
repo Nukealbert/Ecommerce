@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { toast } from 'react-hot-toast';
 const img1 =
   "https://www.reliancedigital.in/medias/Apple-MGN63HNA-Laptops-491946461-i-1-1200Wx1200H?context=bWFzdGVyfGltYWdlc3wxNzczNDJ8aW1hZ2UvanBlZ3xpbWFnZXMvaDVhL2gyZC85NDQzMDgzNTgzNTE4LmpwZ3xhYzRiNWIxZGQ2NjNiNWIyYjI0Y2ZkYTZlZWQ3MTFjZTMxYzVmNDBiNmM5Mzk5OTM2OGVkZmExMjMyYjIxNDQ4";
 const img2 =
@@ -6,7 +7,10 @@ const img2 =
 
 
 function Home() {
-    const addToCart=()=>{}
+    const addToCart=(options)=>{
+        console.log(options)
+        toast.success("Added to Cart")
+    }
     
     const productList=[
         {
@@ -38,7 +42,7 @@ const ProductCard=({name,id,price,handler,imgSrc})=>(
         <img src={imgSrc} alt={name} />
         <p>{name}</p>
         <h4> ${price} </h4>
-        <button onClick={()=>handler()}>Add to Cart</button>
+        <button onClick={()=>handler({name,id,price,quantity:1,imgSrc})}>Add to Cart</button>
     </div>
 
 )
