@@ -1,5 +1,6 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 const img1 =
   "https://www.reliancedigital.in/medias/Apple-MGN63HNA-Laptops-491946461-i-1-1200Wx1200H?context=bWFzdGVyfGltYWdlc3wxNzczNDJ8aW1hZ2UvanBlZ3xpbWFnZXMvaDVhL2gyZC85NDQzMDgzNTgzNTE4LmpwZ3xhYzRiNWIxZGQ2NjNiNWIyYjI0Y2ZkYTZlZWQ3MTFjZTMxYzVmNDBiNmM5Mzk5OTM2OGVkZmExMjMyYjIxNDQ4";
 const img2 =
@@ -7,8 +8,10 @@ const img2 =
 
 
 function Home() {
+    const dispatch=useDispatch()
     const addToCart=(options)=>{
-        console.log(options)
+        dispatch({type:"addToCart" , payload:options});
+        dispatch({type:"calculatePrice"});
         toast.success("Added to Cart")
     }
     
@@ -25,12 +28,19 @@ function Home() {
             imgSrc:img2,
             id:"123456"
         }
-    ]
+    ];
+   
   return (
     <div className='home'>
         {
             productList.map((i)=>(
-                <ProductCard key={i.id} name={i.name} price={i.price} imgSrc={i.imgSrc} handler={addToCart} />
+                <ProductCard 
+                key={i.id} 
+                id={i.id}
+                name={i.name} 
+                price={i.price} 
+                imgSrc={i.imgSrc} 
+                handler={addToCart} />
             ))
         }
     </div>
